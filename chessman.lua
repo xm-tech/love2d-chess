@@ -2,6 +2,7 @@
 local chess = {}
 
 local chess_mt = {
+	-- c: 主表
 	init = function (c, id, x, y, cap, img, alive)
 		c.id = id
 		c.x = x

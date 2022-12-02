@@ -12,6 +12,9 @@ M.init = function ()
 	love.window.setTitle(g.title)
 end
 
+local function init_chesses()
+end
+
 M.draw = function ()
 	love.graphics.draw(M.chess_board, M.x, M.y)
 end

@@ -46,18 +46,31 @@ M.chess_both = {
 	[32] = {1, 6, 0 + M.board_edge_width + M.grid_size * 8, M.grid_size * 3 + M.board_edge_width, "红兵5"},
 }
 
-return M
+-- 根据坐标得到棋盘格子位置编号
+M.get_grid_idx = function (x, y)
+	-- 横向格子坐标
+	local gx
+	-- 纵向格子编号
+	local gy
+	if x - M.board_edge_width < 0 then
+		-- 超出左边界，则横向格子编号 = 0
+		gx = 1
+	else
+		gx = math.floor((x - M.board_edge_width) / M.grid_size)
+	end
 
--- // 棋盘上的棋子编号
--- var PosChesses = [90]int{
--- 	-1, -1, -1, -1, -1, -1, -1, -1, -1,
--- 	-1, -1, -1, -1, -1, -1, -1, -1, -1,
--- 	-1, -1, -1, -1, -1, -1, -1, -1, -1,
--- 	-1, -1, -1, -1, -1, -1, -1, -1, -1,
--- 	-1, -1, -1, -1, -1, -1, -1, -1, -1,
--- 	-1, -1, -1, -1, -1, -1, -1, -1, -1,
--- 	-1, -1, -1, -1, -1, -1, -1, -1, -1,
--- 	-1, -1, -1, -1, -1, -1, -1, -1, -1,
--- 	-1, -1, -1, -1, -1, -1, -1, -1, -1,
--- 	-1, -1, -1, -1, -1, -1, -1, -1, -1,
--- }
+	if y - M.board_edge_width < 0 then
+		-- 超出上边界， 则纵向格子编号 = 0
+		gy = 1
+	else
+		gy = math.floor((y - M.board_edge_width) / M.grid_size)
+	end
+	return gy * 9 + gx
+end
+
+-- local ca = {...}
+-- local gx = math.floor((ca[1] - M.board_edge_width) / M.grid_size)
+-- local gy = math.floor((ca[2] - M.board_edge_width) / M.grid_size)
+-- print("gx", gx, "gy", gy, "ca1", ca[1], "ca2", ca[2])
+
+return M

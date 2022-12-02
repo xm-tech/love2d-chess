@@ -3,7 +3,10 @@ local M = {
 	chess_board = love.graphics.newImage("assets/ChessBoard.png"),
 	x = 0,
 	y = 0,
+	-- 所有棋子
 	chesses = {},
+	-- 格子棋子映射
+	grid_chess_map = {},
 }
 
 local g = require "global"
@@ -24,6 +27,8 @@ local function init_chesses()
 		c:init(data[2], data[3], data[4], data[1], data[1].."-"..data[2]..".png", true, data[5])
 		c.image = love.graphics.newImage("assets/"..c.img)
 		M.chesses[c.idx] = c
+		local grid = g.get_grid_idx(c.x, c.y)
+		M.grid_chess_map[grid + 1] = c
 	end
 
 end
@@ -50,7 +55,9 @@ M.draw = function ()
 	-- 棋子点击事件
 	if love.mouse.isDown(1) then
 		local x, y = love.mouse.getPosition()
-		print(x, y)
+		local grid = g.get_grid_idx(x, y)
+		local grid_chess = M.grid_chess_map[grid + 1]
+		print(x, y, grid, grid_chess.name or "no")
 	end
 end
 

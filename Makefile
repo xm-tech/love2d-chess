@@ -1,7 +1,7 @@
 build:
-	zip -r Chess.love *.lua assets
+	zip -r chess.love *.lua assets
 run:
-	love Chess.love
+	love chess.love
 clean:
-	rm -f Chess.love
+	rm -f chess.love
 

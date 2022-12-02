@@ -1,7 +1,6 @@
 -- 棋子
 local chess = {}
 
-
 local chess_mt = {
 	init = function (c, id, x, y, cap, img, alive)
 		c.id = id
@@ -10,6 +9,9 @@ local chess_mt = {
 		c.cap = cap
 		c.img = img
 		c.alive = alive
+	end,
+	detail = function (c)
+		print(c.id, c.x, c.y, c.cap, c.img,c.alive)
 	end
 }
 
@@ -35,9 +37,10 @@ function chess.new()
 end
 
 return chess
+
 -- local c0 = chess:new()
 -- c0:init(0, 0, 0, 0, "img-c0", true)
 -- local c1 = chess:new()
 -- c1:init(1, 1, 1, 0, "img-c1", true)
--- print(c1.id, c1.x, c1.y, c1.cap, c1.img, c1.alive)
--- print(c0.id, c0.x, c0.y, c0.cap, c0.img, c0.alive)
+-- c0:detail()
+-- c1:detail()

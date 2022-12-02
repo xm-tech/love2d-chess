@@ -6,13 +6,19 @@ local M = {
 }
 
 local g = require "global"
+
+local function init_chesses()
+	local chess = require "chessman"
+	local c0 = chess:new()
+	-- c0:init()
+end
+
 M.init = function ()
 	print("on chessboard init")
 	love.window.setMode(g.win_width, g.win_height)
 	love.window.setTitle(g.title)
-end
 
-local function init_chesses()
+	init_chesses()
 end
 
 M.draw = function ()

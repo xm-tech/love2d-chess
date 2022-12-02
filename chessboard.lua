@@ -51,14 +51,19 @@ M.draw = function ()
 			love.graphics.draw(c.image, c.x, c.y)
 		end
 	end
+end
 
-	-- 棋子点击事件
-	if love.mouse.isDown(1) then
-		local x, y = love.mouse.getPosition()
-		local grid = g.get_grid_idx(x, y)
-		local grid_chess = M.grid_chess_map[grid + 1]
-		print(x, y, grid, grid_chess.name or "no")
+M.mouse_pressed = function(x, y, button, istouch)
+	print("mouse_pressed,", x, y, button, istouch)
+	local grid = g.get_grid_idx(x, y)
+	local grid_chess = M.grid_chess_map[grid + 1]
+	local grid_chess_name = nil
+	if grid_chess then
+		grid_chess_name = grid_chess.name
+	else
+		grid_chess_name = "no"
 	end
+	print(x, y, grid, grid_chess_name)
 end
 
 return M

@@ -10,3 +10,7 @@ function love.draw()
 	chess_board.draw()
 end
 
+function love.mousepressed(x, y, button, istouch)
+	chess_board.mouse_pressed(x, y, button, istouch)
+end
+

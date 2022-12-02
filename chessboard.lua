@@ -37,11 +37,20 @@ M.init = function ()
 end
 
 M.draw = function ()
+	-- 画棋盘
 	love.graphics.draw(M.chess_board, M.x, M.y)
+
+	-- 画棋子
 	for _, c in pairs(M.chesses) do
 		if c.alive then
 			love.graphics.draw(c.image, c.x, c.y)
 		end
+	end
+
+	-- 棋子点击事件
+	if love.mouse.isDown(1) then
+		local x, y = love.mouse.getPosition()
+		print(x, y)
 	end
 end
 

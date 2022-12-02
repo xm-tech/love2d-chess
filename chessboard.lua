@@ -1,6 +1,8 @@
+local g = require "global"
+
 -- 棋盘
 local M = {
-	chess_board = love.graphics.newImage("assets/ChessBoard.png"),
+	chess_board = g.love.graphics.newImage("assets/ChessBoard.png"),
 	x = 0,
 	y = 0,
 	-- 所有棋子
@@ -9,7 +11,6 @@ local M = {
 	grid_chess_map = {},
 }
 
-local g = require "global"
 
 -- 初始化棋子数据
 local function init_chesses()
@@ -32,7 +33,7 @@ local function init_chesses()
 			local img = (_cap-1).."-"..data[1]..".png"
 			-- type, x, y, cap, img, alive, name
 			c:init(data[1], data[2], data[3], _cap, img, true, data[4])
-			c.image = love.graphics.newImage("assets/"..c.img)
+			c.image = g.love.graphics.newImage("assets/"..c.img)
 			M.chesses[c.idx] = c
 			local grid = g.get_grid_idx(c.x, c.y)
 			M.grid_chess_map[grid + 1] = c
@@ -47,20 +48,20 @@ end
 
 M.init = function ()
 	print("on chessboard init")
-	love.window.setMode(g.win_width, g.win_height)
-	love.window.setTitle(g.title)
+	g.love.window.setMode(g.win_width, g.win_height)
+	g.love.window.setTitle(g.title)
 
 	init_chesses()
 end
 
 M.draw = function ()
 	-- 画棋盘
-	love.graphics.draw(M.chess_board, M.x, M.y)
+	g.love.graphics.draw(M.chess_board, M.x, M.y)
 
 	-- 画棋子
 	for _, c in pairs(M.chesses) do
 		if c.alive then
-			love.graphics.draw(c.image, c.x, c.y)
+			g.love.graphics.draw(c.image, c.x, c.y)
 		end
 	end
 end

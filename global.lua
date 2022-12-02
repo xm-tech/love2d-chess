@@ -1,4 +1,6 @@
 local M = {
+	love = require "love",
+
 	win_width = 520,
 	win_height = 576,
 	title = "中国象棋",

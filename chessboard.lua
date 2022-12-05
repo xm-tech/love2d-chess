@@ -75,7 +75,9 @@ M.mouse_pressed = function(x, y, button, istouch)
 	local grid_chess = M.grid_chess_map[grid + 1]
 	local grid_chess_name = nil
 	if grid_chess then
+		grid_chess:detail()
 		grid_chess_name = grid_chess.name
+		M.chess_selected = grid_chess
 	else
 		grid_chess_name = "no"
 	end

@@ -4,7 +4,7 @@ A Love2d Based China Chess Game
 overview
 --------
 
-<img src="./doc/chessboard-2022-12-05.png" style="width:400px"/>
+![chessboard](./doc/chessboard-2022-12-05.png)
 
 build
 -----

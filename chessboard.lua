@@ -19,7 +19,7 @@ local M = {
 -- 初始化棋子数据
 local function init_chesses()
 	math.randomseed(os.time())
-	-- 方阵营(颜色), 0-红, 1-黑
+	-- 我方阵营(颜色), 0-红, 1-黑
 	local me = math.random(2)
 	-- 对方阵营
 	local oppo

@@ -33,7 +33,7 @@ local function init_chesses()
 			-- data: {棋子类别，x, y, 名称}
 			local c = chess:new()
 			id = id + 1
-			print("id:", id, "cap:", _cap, "type:", data[1], "x:", data[2], "y:", data[3], "name:", data[4])
+			print("id:", id, "cap:", _cap, "tid:", data[1], "x:", data[2], "y:", data[3], "name:", data[4])
 			local img = (_cap-1).."-"..data[1]..".png"
 			-- id, tid, x, y, cap, img, alive, name
 			c:init(id, data[1], data[2], data[3], _cap, img, true, data[4])

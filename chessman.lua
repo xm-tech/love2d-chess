@@ -3,7 +3,7 @@ local chess = {
 	-- 棋子唯一标识
 	id = nil,
 	-- 棋子类别表识
-	tid = 0,
+	tid = nil,
 	-- x 坐标
 	x = 0,
 	-- y 坐标

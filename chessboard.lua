@@ -35,7 +35,7 @@ local function init_chesses()
 			id = id + 1
 			print("id:", id, "cap:", _cap, "type:", data[1], "x:", data[2], "y:", data[3], "name:", data[4])
 			local img = (_cap-1).."-"..data[1]..".png"
-			-- type, x, y, cap, img, alive, name
+			-- id, tid, x, y, cap, img, alive, name
 			c:init(id, data[1], data[2], data[3], _cap, img, true, data[4])
 			c.image = g.love.graphics.newImage("assets/"..c.img)
 			M.chesses[c.id] = c

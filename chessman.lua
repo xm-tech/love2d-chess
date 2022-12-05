@@ -38,6 +38,11 @@ function chess:init(id, tid, x, y, cap, img, alive, name)
 	self.name = name
 end
 
+function chess:move(nx, ny)
+	self.x = nx
+	self.y = ny
+end
+
 function chess:detail()
 	print(self.id, self.tid, self.x, self.y, self.cap, self.img,self.alive, self.name)
 end

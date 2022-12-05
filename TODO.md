@@ -8,3 +8,5 @@ chess move
 eat chess
 
 win/fail
+
+multiplay

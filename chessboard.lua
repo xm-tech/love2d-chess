@@ -9,32 +9,36 @@ local M = {
 	chesses = {},
 	-- 格子棋子映射
 	grid_chess_map = {},
+	-- 选中的棋子
+	chess_selected = {},
+	-- 目标位置
+	target_pos = {},
 }
 
 
 -- 初始化棋子数据
 local function init_chesses()
 	math.randomseed(os.time())
-	-- 随机己方阵营(颜色), 0-红, 1-黑
+	-- 方阵营(颜色), 0-红, 1-黑
 	local me = math.random(2)
 	-- 对方阵营
 	local oppo
 	if me == 1 then oppo = 2 else oppo = 1 end
-	local idx = 0
+	-- 棋子唯一标识
+	local id = 0
 	local chess = require "chessman"
 
 	local function _init_chesses(who, _cap)
 		for _, data in pairs(g.chess_both[who]) do
 			-- data: {棋子类别，x, y, 名称}
 			local c = chess:new()
-			idx = idx + 1
-			c.idx = idx
-			print("idx:", c.idx, "cap:", _cap, "type:", data[1], "x:", data[2], "y:", data[3], "name:", data[4])
+			id = id + 1
+			print("id:", id, "cap:", _cap, "type:", data[1], "x:", data[2], "y:", data[3], "name:", data[4])
 			local img = (_cap-1).."-"..data[1]..".png"
 			-- type, x, y, cap, img, alive, name
-			c:init(data[1], data[2], data[3], _cap, img, true, data[4])
+			c:init(id, data[1], data[2], data[3], _cap, img, true, data[4])
 			c.image = g.love.graphics.newImage("assets/"..c.img)
-			M.chesses[c.idx] = c
+			M.chesses[c.id] = c
 			local grid = g.get_grid_idx(c.x, c.y)
 			M.grid_chess_map[grid + 1] = c
 		end

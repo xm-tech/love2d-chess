@@ -1,4 +1,10 @@
 Tasks
 =====
 
-draw the board
+[x] draw the board
+
+chess move
+
+eat chess
+
+win/fail

@@ -1,2 +1,3 @@
 *.love
 .luarc.json
+.DS_Store

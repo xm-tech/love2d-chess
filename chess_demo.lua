@@ -1,4 +1,4 @@
-local chess = require "chessman"
+local chess = require "chess"
 
 local c0 = chess:new()
 c0:init(0, 6, 0, 0, 0, "img-c0", true, "c0")

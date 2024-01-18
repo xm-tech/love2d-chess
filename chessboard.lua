@@ -26,7 +26,7 @@ local function init_chesses()
 	if me == 1 then other = 2 else other = 1 end
 	-- 棋子唯一标识
 	local id = 0
-	local chess = require "chessman"
+	local chess = require "chess"
 
 	local function _init_chesses(who, _cap)
 		for _, data in pairs(g.chess_both[who]) do

@@ -18,6 +18,8 @@ local chess = {
 	name = "",
 	-- 棋子 love2d 图片
 	image = nil,
+	-- 是否被选中
+	selected = false,
 }
 
 function chess:new(c)
@@ -36,11 +38,22 @@ function chess:init(id, tid, x, y, cap, img, alive, name)
 	self.img = img
 	self.alive = alive
 	self.name = name
+	self.selected = false
 end
 
 function chess:move(nx, ny)
+	print("chess move,x:", x, ",y:", y, ",nx:", nx, ",ny:", ny)
 	self.x = nx
 	self.y = ny
+end
+
+function chess:select()
+	self.selected = true
+	-- print("select, cid:", self.id)
+end
+
+function chess:unselect()
+	self.selected = false
 end
 
 function chess:detail()

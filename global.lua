@@ -56,25 +56,28 @@ M.chess_both = {
 }
 
 -- 根据坐标得到棋盘格子位置编号
-M.get_grid_idx = function (x, y)
+M.get_grid = function (x, y)
 	-- 横向格子坐标
 	local gx
 	-- 纵向格子编号
 	local gy
 	if x - M.board_edge_width < 0 then
 		-- 超出左边界，则横向格子编号 = 0
-		gx = 1
+		gx = 0
 	else
 		gx = math.floor((x - M.board_edge_width) / M.grid_size)
 	end
 
 	if y - M.board_edge_width < 0 then
 		-- 超出上边界， 则纵向格子编号 = 0
-		gy = 1
+		gy = 0
 	else
 		gy = math.floor((y - M.board_edge_width) / M.grid_size)
 	end
-	return gy * 9 + gx
+	local nx = (gx) * M.grid_size + M.board_edge_width
+	local ny = (gy) * M.grid_size + M.board_edge_width
+	print("getgrid,x:", x, ",y:", y, ",nx: ", nx, ",ny:", ny)
+	return gy * 9 + gx, nx, ny
 end
 
 -- local ca = {...}

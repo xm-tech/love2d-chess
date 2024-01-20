@@ -12,7 +12,7 @@ local M = {
 	-- 格子棋子映射
 	grid_chess_map = {},
 	-- 选中的棋子
-	chess_selected = {},
+	chess_selected = nil,
 	-- 目标位置
 	target_pos = {},
 	-- 我方阵营

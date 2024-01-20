@@ -80,32 +80,37 @@ M.mouse_pressed = function(x, y)
 	local grid_chess = M.grid_chess_map[grid + 1]
 	if grid_chess then
 		-- 点中棋子
-		-- grid_chess:detail()
+		grid_chess:detail()
 		if grid_chess.alive == false then
 			-- 选中已死棋子
 			return
 		end
 		print("mouse_pressed, cid:", grid_chess.id, ",cap:", grid_chess.cap, ",ourcap:", M.our_cap, ",x:", x, ",y:", y, ",gx:", gx, ",gy:", gy)
-		if grid_chess.cap == M.our_cap then
+		-- if grid_chess.cap == M.our_cap then
 			-- 点中我方棋子
 			grid_chess:select()
 			M.chess_selected = grid_chess
-			return
-		else
-			-- 点中对方棋子
-			-- 若之前已选中了我方棋子, 则吃子
-			return
-		end
+			-- return
+		-- else
+		-- 	-- 点中对方棋子
+		-- 	-- 若之前已选中了我方棋子, 则吃子
+		-- 	return
+		-- end
 	else
 		-- 点中空格子
-		-- 若之前已选中我方棋子，则移动到该新位置
-		if M.chess_selected and M.chess_selected.cap == M.our_cap then
+		-- 若之前已选中我方棋子，则移动到该新格子
+		print("M.chess_selected:", M.chess_selected, ",ourcap:", M.our_cap)
+		-- if M.chess_selected and M.chess_selected.cap == M.our_cap then
+		if M.chess_selected then
 			local ox = M.chess_selected.x
 			local oy = M.chess_selected.y
-			-- M.chess_selected.move(x, y)
+			local og, _, _ = g.get_grid(ox, oy)
 
-			M.chess_selected.x = gx
-			M.chess_selected.y = gy
+			local c = M.chesses[M.chess_selected.id]
+			c.x = gx
+			c.y = gy
+			M.grid_chess_map[grid + 1] = c
+			M.grid_chess_map[og + 1] = nil
 			M.chess_selected = nil
 			print("move,ox:", ox, ",oy:", oy, ",nx:", gx, ",ny:", gy, ",x:", x, ",y:", y)
 		end

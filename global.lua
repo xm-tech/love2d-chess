@@ -9,6 +9,7 @@ local M = {
 	board_edge_width = 8,
 	board_width = 8 + 56*9 + 8,
 	board_height = 8 + 56*10 + 8,
+-- 311, 121 -> 
 }
 
 -- 棋子出生点
@@ -57,7 +58,7 @@ M.chess_both = {
 
 -- 根据坐标得到棋盘格子位置编号
 M.get_grid = function (x, y)
-	-- 横向格子坐标
+	-- 横向格子编号
 	local gx
 	-- 纵向格子编号
 	local gy
@@ -74,9 +75,9 @@ M.get_grid = function (x, y)
 	else
 		gy = math.floor((y - M.board_edge_width) / M.grid_size)
 	end
-	local nx = (gx) * M.grid_size + M.board_edge_width
-	local ny = (gy) * M.grid_size + M.board_edge_width
-	print("getgrid,x:", x, ",y:", y, ",nx: ", nx, ",ny:", ny)
+	local nx = gx * M.grid_size + M.board_edge_width
+	local ny = gy * M.grid_size + M.board_edge_width
+	-- print("getgrid,x:", x, ",y:", y, ",nx: ", nx, ",ny:", ny)
 	return gy * 9 + gx, nx, ny
 end
 

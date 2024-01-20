@@ -55,8 +55,13 @@ M.init = function ()
 	-- 我方阵营(颜色), 1-红, 2-黑
 	M.our_cap = math.random(2)
 	-- 对方阵营
-	if M.our_cap == 1 then M.other_cap = 2 else M.other_cap = 1 end
+	if M.our_cap == 1 then
+		M.other_cap = 2
+	else
+		M.other_cap = 1
+	end
 
+	print("our_cap:", M.our_cap, ",other_cap:", M.other_cap)
 	-- 初始化棋子
 	init_chesses(M.our_cap)
 	init_chesses(M.other_cap)
@@ -80,22 +85,9 @@ M.mouse_pressed = function(x, y)
 	local grid_chess = M.grid_chess_map[grid + 1]
 	if grid_chess then
 		-- 点中棋子
-		grid_chess:detail()
-		if grid_chess.alive == false then
-			-- 选中已死棋子
-			return
-		end
 		print("mouse_pressed, cid:", grid_chess.id, ",cap:", grid_chess.cap, ",ourcap:", M.our_cap, ",x:", x, ",y:", y, ",gx:", gx, ",gy:", gy)
-		-- if grid_chess.cap == M.our_cap then
-			-- 点中我方棋子
-			grid_chess:select()
-			M.chess_selected = grid_chess
-			-- return
-		-- else
-		-- 	-- 点中对方棋子
-		-- 	-- 若之前已选中了我方棋子, 则吃子
-		-- 	return
-		-- end
+		grid_chess:select()
+		M.chess_selected = grid_chess
 	else
 		-- 点中空格子
 		-- 若之前已选中我方棋子，则移动到该新格子

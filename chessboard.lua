@@ -29,11 +29,11 @@ local function init_chesses(cap)
 		-- chesscnf: {棋子类别，x, y, 名称}
 		local c = chess:new()
 		-- id = id + 1
-		id = chesscnf[1]
-		tid = chesscnf[2]
-		x = chesscnf[3]
-		y = chesscnf[4]
-		name = chesscnf[5]
+		local id = chesscnf[1]
+		local tid = chesscnf[2]
+		local x = chesscnf[3]
+		local y = chesscnf[4]
+		local name = chesscnf[5]
 		local img = (cap-1).."-"..tid..".png"
 		-- id, tid, x, y, cap, img, alive, name
 		c:init(id, tid, x, y, cap, img, true, name)

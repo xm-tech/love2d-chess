@@ -3,8 +3,6 @@ local g = require "global"
 -- 棋盘
 local M = {
 	chess_board = g.love.graphics.newImage("assets/ChessBoard.png"),
-	x = 0,
-	y = 0,
 	-- 棋局玩家
 	players = {},
 	-- 所有棋子

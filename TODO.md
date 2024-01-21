@@ -3,14 +3,12 @@ Tasks
 
 [x] draw the board
 
+cap bug fix
 
 chess move
     - [x] select chess
     - [x] move without checking
-    - cap check
     - chess move rule
-
-cap bug fix
 
 eat chess
 

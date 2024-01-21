@@ -15,16 +15,17 @@ local M = {
 	chess_selected = nil,
 	-- 目标位置
 	target_pos = {},
-	-- 我方阵营
-	our_cap = nil,
-	-- 对方阵营
-	other_cap = nil,
+	-- 我方颜色
+	our_color = nil,
+	-- 对方颜色
+	other_color = nil,
 }
 
 
--- 初始化棋子数据
-local function init_chesses(cap)
+-- 初始化棋子数据, cap 阵营，只决定棋子的颜色，不决定自己的棋子位置, 己方棋子始终在下面
+local function init_chesses(cap, color)
 	local chess = require "chess"
+	-- 此处， g.chess_both 下标始终是自己的取2， 对方的取 1， 因为 2 的Y坐标 大
 	for _, chesscnf in pairs(g.chess_both[cap]) do
 		-- chesscnf: {棋子类别，x, y, 名称}
 		local c = chess:new()
@@ -34,13 +35,14 @@ local function init_chesses(cap)
 		local x = chesscnf[3]
 		local y = chesscnf[4]
 		local name = chesscnf[5]
-		local img = (cap-1).."-"..tid..".png"
+		local img = (color-1).."-"..tid..".png"
+		print("id:", id, ",tid:", tid, ",x:", x, ",y:", y, ",name:", name, ",img:", img)
 		-- id, tid, x, y, cap, img, alive, name
 		c:init(id, tid, x, y, cap, img, true, name)
 		c.image = g.love.graphics.newImage("assets/"..c.img)
 		M.chesses[c.id] = c
 		local grid, gx, gy = g.get_grid(c.x, c.y)
-		print("id:", id, "cap:", cap, "tid:", tid, "x:", x, "y:", y, ",gx:", gx, ",gy:", gy, "name:", name, "grid:", (grid + 1))
+		-- print("id:", id, "cap:", cap, "tid:", tid, "x:", x, "y:", y, ",gx:", gx, ",gy:", gy, "name:", name, "grid:", (grid + 1))
 		M.grid_chess_map[grid + 1] = c
 	end
 end
@@ -52,19 +54,19 @@ M.init = function ()
 
 	-- 初始化阵营
 	math.randomseed(os.time())
-	-- 我方阵营(颜色), 1-红, 2-黑
-	M.our_cap = math.random(2)
+	-- 我方颜色, 1-红, 2-黑
+	M.our_color = math.random(2)
 	-- 对方阵营
-	if M.our_cap == 1 then
-		M.other_cap = 2
+	if M.our_color == 1 then
+		M.other_color = 2
 	else
-		M.other_cap = 1
+		M.other_color = 1
 	end
 
-	print("our_cap:", M.our_cap, ",other_cap:", M.other_cap)
+	print("our_color:", M.our_color, ",other_color:", M.other_color)
 	-- 初始化棋子
-	init_chesses(M.our_cap)
-	init_chesses(M.other_cap)
+	init_chesses(1, M.our_color)
+	init_chesses(2, M.other_color)
 	-- 初始化玩家
 end
 
@@ -85,14 +87,13 @@ M.mouse_pressed = function(x, y)
 	local grid_chess = M.grid_chess_map[grid + 1]
 	if grid_chess then
 		-- 点中棋子
-		print("mouse_pressed, cid:", grid_chess.id, ",cap:", grid_chess.cap, ",ourcap:", M.our_cap, ",x:", x, ",y:", y, ",gx:", gx, ",gy:", gy)
+		print("mouse_pressed, cid:", grid_chess.id, ",color:", grid_chess.color, ",other_color:", M.other_color, ",x:", x, ",y:", y, ",gx:", gx, ",gy:", gy)
 		grid_chess:select()
 		M.chess_selected = grid_chess
 	else
 		-- 点中空格子
 		-- 若之前已选中我方棋子，则移动到该新格子
-		print("M.chess_selected:", M.chess_selected, ",ourcap:", M.our_cap)
-		-- if M.chess_selected and M.chess_selected.cap == M.our_cap then
+		print("M.chess_selected:", M.chess_selected, ",our_color:", M.our_color)
 		if M.chess_selected then
 			local ox = M.chess_selected.x
 			local oy = M.chess_selected.y

@@ -22,10 +22,14 @@ local M = {
 }
 
 
--- 初始化棋子数据, cap 阵营，只决定棋子的颜色，不决定自己的棋子位置, 己方棋子始终在下面
-local function init_chesses(cap, color)
+-- 初始化棋子数据, cap 阵营，只决定棋子的位置，不决定自己的棋子颜色, 己方棋子始终在下面
+local function init_chesses(cap)
+	local color = M.other_color
+	if cap == 1 then
+		color = M.our_color
+	end
 	local chess = require "chess"
-	-- 此处， g.chess_both 下标始终是自己的取2， 对方的取 1， 因为 2 的Y坐标 大
+	-- 此处， g.chess_both 下标始终是自己的取1， 对方的取 2， 因为 1 的Y坐标 大
 	for _, chesscnf in pairs(g.chess_both[cap]) do
 		-- chesscnf: {棋子类别，x, y, 名称}
 		local c = chess:new()
@@ -64,9 +68,10 @@ M.init = function ()
 	end
 
 	print("our_color:", M.our_color, ",other_color:", M.other_color)
-	-- 初始化棋子
-	init_chesses(1, M.our_color)
-	init_chesses(2, M.other_color)
+	-- 初始化己方棋子
+	init_chesses(1)
+	-- 初始化对方棋子
+	init_chesses(2)
 	-- 初始化玩家
 end
 

@@ -54,11 +54,11 @@ M.init = function ()
 	g.love.window.setMode(g.win_width, g.win_height)
 	g.love.window.setTitle(g.title)
 
-	-- 初始化阵营
+	-- 初始化颜色
 	math.randomseed(os.time())
 	-- 我方颜色, 1-红, 2-黑
 	M.our_color = math.random(2)
-	-- 对方阵营
+	-- 对方颜色
 	if M.our_color == 1 then
 		M.other_color = 2
 	else

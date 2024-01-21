@@ -2,7 +2,7 @@ local g = require "global"
 
 -- 棋盘
 local M = {
-	chess_board = g.love.graphics.newImage("assets/ChessBoard.png"),
+	chess_board_img = g.love.graphics.newImage("assets/ChessBoard.png"),
 	-- 棋局玩家
 	players = {},
 	-- 所有棋子
@@ -75,7 +75,7 @@ end
 
 M.draw = function ()
 	-- 画棋盘
-	g.love.graphics.draw(M.chess_board, M.x, M.y)
+	g.love.graphics.draw(M.chess_board_img, M.x, M.y)
 
 	-- 画棋子
 	for _, c in pairs(M.chesses) do

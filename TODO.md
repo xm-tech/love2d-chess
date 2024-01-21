@@ -8,7 +8,9 @@ Tasks
 chess move
     - [x] select chess
     - [x] move without checking
-    - move pos bug fix
+    - [x] move pos bug fix
+    - chess select effect
+    - chess select sound
     - chess move rule
 
 eat chess

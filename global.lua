@@ -78,6 +78,10 @@ M.get_grid = function (x, y)
 	local nx = gx * M.grid_size + M.board_edge_width
 	local ny = gy * M.grid_size + M.board_edge_width
 	-- print("getgrid,x:", x, ",y:", y, ",nx: ", nx, ",ny:", ny)
+	if ny > 300 then
+		-- fix the y of myself
+		ny = ny +  2 * M.board_edge_width
+	end
 	return gy * 9 + gx, nx, ny
 end
 

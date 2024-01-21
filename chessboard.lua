@@ -88,29 +88,29 @@ M.draw = function ()
 end
 
 M.mouse_pressed = function(x, y)
-	local grid, gx, gy = g.get_grid(x, y)
+	local grid, ngx, ngy = g.get_grid(x, y)
 	local grid_chess = M.grid_chess_map[grid + 1]
 	if grid_chess then
 		-- 点中棋子
-		print("mouse_pressed, cid:", grid_chess.id, ",color:", grid_chess.color, ",other_color:", M.other_color, ",x:", x, ",y:", y, ",gx:", gx, ",gy:", gy)
+		print("mouse_pressed, cid:", grid_chess.id, ",color:", grid_chess.color, ",other_color:", M.other_color, ",x:", x, ",y:", y, ",ngx:", ngx, ",ngy:", ngy)
 		grid_chess:select()
 		M.chess_selected = grid_chess
 	else
 		-- 点中空格子
 		-- 若之前已选中我方棋子，则移动到该新格子
-		print("M.chess_selected:", M.chess_selected, ",our_color:", M.our_color)
+		print("M.chess_selected:", M.chess_selected, ",our_color:", M.our_color, ",x:", x, ",y:", y)
 		if M.chess_selected then
 			local ox = M.chess_selected.x
 			local oy = M.chess_selected.y
-			local og, _, _ = g.get_grid(ox, oy)
+			local og, ogx, ogy = g.get_grid(ox, oy)
 
 			local c = M.chesses[M.chess_selected.id]
-			c.x = gx
-			c.y = gy
+			c.x = ngx
+			c.y = ngy
 			M.grid_chess_map[grid + 1] = c
 			M.grid_chess_map[og + 1] = nil
+			print("move,cid:",M.chess_selected.id, ",ox:", ox, ",ogx:", ogx, ",oy:", oy, ",ogy:", ogy, ",nx:", x, ",ny:", y, ",ngx:", ngx, ",ngy:", ngy)
 			M.chess_selected = nil
-			print("move,ox:", ox, ",oy:", oy, ",nx:", gx, ",ny:", gy, ",x:", x, ",y:", y)
 		end
 		return
 	end

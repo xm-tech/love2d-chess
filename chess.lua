@@ -10,6 +10,8 @@ local chess = {
 	y = 0,
 	-- 阵营
 	cap = 0,
+	-- 棋子颜色
+	color = 1,
 	-- 棋子图片名, etc: 0-0.png
 	img = nil,
 	-- 是否活着
@@ -54,6 +56,10 @@ end
 
 function chess:unselect()
 	self.selected = false
+end
+
+function chess:die()
+	self.alive = false
 end
 
 function chess:detail()

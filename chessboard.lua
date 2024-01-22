@@ -20,6 +20,16 @@ local M = {
 }
 
 
+local function isMyChess(chess)
+	if chess.color == M.our_color then
+		return true
+	else
+		return false
+	end
+end
+
+
+
 -- 初始化棋子数据, cap 阵营，只决定棋子的位置，不决定自己的棋子颜色, 己方棋子始终在下面
 local function init_chesses(cap)
 	local color = M.other_color
@@ -41,6 +51,7 @@ local function init_chesses(cap)
 		print("id:", id, ",tid:", tid, ",x:", x, ",y:", y, ",name:", name, ",img:", img)
 		-- id, tid, x, y, cap, img, alive, name
 		c:init(id, tid, x, y, cap, img, true, name)
+		c.color = color
 		c.image = g.love.graphics.newImage("assets/"..c.img)
 		M.chesses[c.id] = c
 		local grid, gx, gy = g.get_grid(c.x, c.y)
@@ -91,6 +102,29 @@ M.mouse_pressed = function(x, y)
 	if grid_chess then
 		-- 点中棋子
 		print("mouse_pressed, cid:", grid_chess.id, ",color:", grid_chess.color, ",other_color:", M.other_color, ",x:", x, ",y:", y, ",ngx:", ngx, ",ngy:", ngy)
+
+		-- 若是对方棋子，且之前没选子，则不能选对方该子
+		if isMyChess(grid_chess) == false and M.chess_selected == nil then
+			return
+		end
+
+		-- 若上次选中的是自己的子,且本次选中对方的子，则吃子
+		if (M.chess_selected ~= nil) and (isMyChess(M.chess_selected) == true) and (isMyChess(grid_chess) == false) then
+			-- 吃子
+			grid_chess:die()
+			-- 我方子位置更新为被吃子
+			local ox = M.chess_selected.x
+			local oy = M.chess_selected.y
+			local og, ogx, ogy = g.get_grid(ox, oy)
+			M.chess_selected.x = grid_chess.x
+			M.chess_selected.y = grid_chess.y
+			M.grid_chess_map[grid + 1] = M.chess_selected
+			M.grid_chess_map[og + 1] = nil
+			M.chess_selected = nil
+		end
+
+
+		-- 若之前未曾选子，且当前子是自己的子，则选中
 		grid_chess:select()
 		M.chess_selected = grid_chess
 	else
